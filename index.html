@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="StateSpaceDiffuser couples diffusion and state-space models to sustain long-context world modeling rollouts.">
+  <meta property="og:title" content="StateSpaceDiffuser: Bringing Long Context to Diffusion World Models"/>
+  <meta property="og:description" content="StateSpaceDiffuser injects recurrent state-space memory into diffusion world models to preserve coherent long-horizon rollouts."/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <!-- <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/> -->
+
+
+  <meta name="twitter:title" content="StateSpaceDiffuser: Bringing Long Context to Diffusion World Models">
+  <meta name="twitter:description" content="StateSpaceDiffuser fuses diffusion synthesis with state-space memory for consistent, long-horizon world simulations.">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <!-- <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="World models, diffusion models, state-space models, long context, temporal consistency">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>StateSpaceDiffuser: Bringing Long Context to Diffusion World Models</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">StateSpaceDiffuser: Bringing Long Context to Diffusion World Models</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block"><a href="https://insait.ai/nedko-savov/" target="_blank">Nedko Savov</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://insait.ai/naser-kazemi/" target="_blank">Naser Kazemi</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://insait.ai/deheng-zhang/" target="_blank">Deheng Zhang</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://insait.ai/dr-danda-paudel/" target="_blank">Danda Paudel</a><sup>1</sup>,</span>
+              <span class="author-block"><a href="https://xiwang1212.github.io/homepage/" target="_blank">Xi Wang</a><sup>1,2,3</sup>,</span>
+              <span class="author-block"><a href="https://insait.ai/prof-luc-van-gool/" target="_blank">Luc Van Gool</a><sup>1</sup></span>
+            </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"><sup>1</sup>INSAIT, Sofia University, <sup>2</sup> ETH Zurich, <sup>3</sup> TU Munich <br>arXiv 2025</span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/abs/2505.22246" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                <!-- ArXiv abstract Link -->
+                <!-- <span class="link-block">
+                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/insait-institute/StateSpaceDiffuser" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+            </div>
+            <div class="has-text-centered mt-5">
+              <img src="static/images/teaser.png" alt="StateSpaceDiffuser teaser" class="teaser-image">
+            </div>
+            <h2 class="subtitle has-text-centered mt-4">
+              StateSpaceDiffuser fuses diffusion-based world models with a recurrent state-space backbone to preserve coherent rollouts across long horizons.
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<!-- <section class="hero teaser"> -->
+<!--   <div class="container is-max-desktop"> -->
+<!--     <div class="hero-body"> -->
+<!--       <div class="has-text-centered"> -->
+<!--         &lt;!-- <img src="static/images/title.gif" alt="Your GIF" height="300%"> --&gt; -->
+<!--       </div> -->
+<!--       <video poster="" id="tree" controls height="100%">  -->
+<!--         <source src="static/videos/final_video.mp4" -->
+<!--         type="video/mp4"> -->
+<!--       </video> -->
+<!--       <h2 class="subtitle has-text-centered"> -->
+<!--         StateSpaceDiffuser bridges diffusion and state-space modeling to maintain coherent rollouts over long horizons. -->
+<!--       </h2> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </section> -->
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            World models have recently become promising tools for predicting realistic visuals based on actions in complex environments. However, their reliance on only a few recent observations leads them to lose track of the long-term context. Consequently, in just a few steps the generated scenes drift from what was previously observed, undermining the temporal coherence of the sequence. This limitation of the state-of-the-art world models, most of which rely on diffusion, comes from their lack of a lasting environment state. To address this problem, we introduce StateSpaceDiffuser, where a diffusion model is enabled to perform long-context tasks by integrating features from a state-space model, representing the entire interaction history. This design restores long-term memory while preserving the high-fidelity synthesis of diffusion models. To rigorously measure temporal consistency, we develop an evaluation protocol that probes a model's ability to reinstantiate seen content in extended rollouts. Comprehensive experiments show that StateSpaceDiffuser significantly outperforms a strong diffusion-only baseline, maintaining a coherent visual context for an order of magnitude more steps. It delivers consistent views in both a 2D maze navigation and a complex 3D environment. These results establish that bringing state-space representations into diffusion models is highly effective in demonstrating both visual details and long-term memory.
+          </p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- <section class="hero is-small"> -->
+<!--   <div class="hero-body"> -->
+<!--     -->
+<!--     <div class="container is-max-desktop"> -->
+<!--       <div class="columns is-centered has-text-centered"> -->
+<!--         <div class="column"> -->
+<!--           <h2 class="title is-4">Our Framework</h2> -->
+<!--           <div class="content has-text-justified"> -->
+<!--             -->
+<!--           <div class="has-text-centered"> -->
+<!--             -->
+<!--             <img src="static/images/teaserv2.png" alt="Teaser" height="300%"> -->
+<!--             &lt;!-- <img src="static/images/all_control.gif" alt="Your GIF" height="300%"> --&gt; -->
+<!--           </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--     -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </section> -->
+
+<!-- <section class="hero is-small"> -->
+<!--   <div class="hero-body"> -->
+<!--     -->
+<!--     <div class="container is-max-desktop"> -->
+<!--       <div class="columns is-centered has-text-centered"> -->
+<!--         <div class="column"> -->
+<!--           <h2 class="title is-4">Multi-Environment Control with GenieRedux-G</h2> -->
+<!--           <div class="content has-text-justified"> -->
+<!--             <p> -->
+<!--               We avoid the costly human demonstration and video curation usually needed for training multi-environment world models, by instead annotating the behavior and controls of hundreds of virtual environments - our RetroAct dataset. Each annotated environment can give us many action demonstrations without the need for extra labeling. -->
+<!--             </p> -->
+<!--             <p> -->
+<!--               We train our GenieRedux-G model on interactions from many environments at once and, even with a random agent, the model learns to accurately execute the actions. -->
+<!--             </p> -->
+<!--             <p> -->
+<!--               -->
+<!--             </p> -->
+<!--             -->
+<!--           <div class="has-text-centered"> -->
+<!--             -->
+<!--             <video poster="" id="tree" autoplay controls muted loop height="100%">  -->
+<!--               <source src="static/videos/Control.mp4" -->
+<!--               type="video/mp4"> -->
+<!--             </video>  -->
+<!--                 <video poster="" id="tree" autoplay controls muted loop height="100%">  -->
+<!--                 <source src="static/videos/Replication.mp4" -->
+<!--                 type="video/mp4"> -->
+<!--               </video>  -->
+<!--             &lt;!-- <img src="static/images/all_control.gif" alt="Your GIF" height="300%"> --&gt; -->
+<!--           </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--     -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </section> -->
+
+
+<!-- <section class="hero is-small"> -->
+<!--   <div class="hero-body"> -->
+<!--     -->
+<!--     <div class="container is-max-desktop"> -->
+<!--       <div class="columns is-centered has-text-centered"> -->
+<!--         <div class="column"> -->
+<!--           <h2 class="title is-4">Exploring Environments with AutoExplore Agent</h2> -->
+<!--           <div class="content has-text-justified"> -->
+<!--             <p> -->
+<!--               To replace the limited random agent, we design AutoExplore Agent - an exploration agent that navigates virtual environments only driven by a reward based on the uncertainty of our world model. AutoExplore Agent is independen of environment-specific reward and can be applied to any environment. -->
+<!--             </p> -->
+<!--             <p> -->
+<!--               We demonstrate that the interaction data obtained from AutoExplore Agent is much more diverse than with a random agent. -->
+<!--             </p> -->
+<!--           <div class="has-text-centered"> -->
+<!--               -->
+<!--               <video poster="" id="tree" autoplay controls muted loop height="100%">  -->
+<!--                 <source src="static/videos/AutoExplore.mp4" -->
+<!--                 type="video/mp4"> -->
+<!--               </video>  -->
+<!--             &lt;!-- <img src="static/images/all_control.gif" alt="Your GIF" height="300%"> --&gt; -->
+<!--           </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--     -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </section> -->
+
+
+<!-- <section class="hero is-small"> -->
+<!--   <div class="hero-body"> -->
+<!--     -->
+<!--     <div class="container is-max-desktop"> -->
+<!--       <div class="columns is-centered has-text-centered"> -->
+<!--         <div class="column"> -->
+<!--           <h2 class="title is-4">Better Environment Simulation with AutoExplore Agent</h2> -->
+<!--           <div class="content has-text-justified"> -->
+<!--             <p> -->
+<!--               Finetuning our pretrained GenieRedux-G Model with the data from AutoExplore Agent leads to a better visual fidelity and controllability. -->
+<!--             </p> -->
+<!--           <div class="has-text-centered"> -->
+<!--               -->
+<!--               <video poster="" id="tree" autoplay controls muted loop height="100%">  -->
+<!--                 <source src="static/videos/AutoExplore Results.mp4" -->
+<!--                 type="video/mp4"> -->
+<!--               </video>  -->
+<!--             &lt;!-- <img src="static/images/all_control.gif" alt="Your GIF" height="300%"> --&gt; -->
+<!--           </div> -->
+
+
+<!--           <div class="content has-text-justified"> -->
+<!--             <p> -->
+<!--               Our framework combines diverse annotated environments with automatic exploration, and we have demonstrated that this approach achievs strong visual fidelity and controllability without relying on human demonstrations. -->
+<!--             </p> -->
+<!--           <div class="has-text-centered"> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--     -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </section> -->
+
+<!-- 
+<section class="hero is-small">
+  <div class="hero-body">
+    
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Our Framework</h2>
+          <div class="content has-text-justified">
+            <p>
+              Our framework improves multi-environment simulation by using filtering and exploration of virtual environments to cheaply and effectively obtain large amounts of exploration data. Using this data, we train our GenieRedux-G world model, adapted to virtual environments, to demonstrate the simulation abilities.
+            </p>
+          <div class="has-text-centered">
+              
+            <img src="static/images/teaser.png" alt="Framework" height="300%">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+</div>
+</section> -->
+
+<!-- 
+<section class="hero is-small">
+  <div class="hero-body">
+    
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Environment control with GenieRedux-G</h2>
+          <div class="content has-text-justified">
+            <p>
+              We base our models on Genie, a model that excels at learning to apply frame-by-frame motion control across visually diverse environments.
+              However, in contrast, our best model - GenieRedux-G-TA, is trained on data, generated by RL agent exploration, rather than a random agent or costly human demonstrations.
+              In addition, it is guided by the readily available agent's actions.
+            </p>
+            <p>
+              We demonstrate that GenieRedux-G-TA is able to represent all actions from the Coinrun case study environment, independent of visual appearance.
+            </p>
+            <p>
+              
+            </p>
+            
+          <div class="has-text-centered">
+            <img src="static/images/all_control.gif" alt="Your GIF" height="300%">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+</div>
+</section> -->
+
+<!-- Image carousel -->
+<!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item"> -->
+        <!-- Your image here -->
+        <!-- <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          First image description.
+        </h2>
+      </div> -->
+      <!-- <div class="item">
+        Your image here -->
+        <!-- <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Second image description.
+        </h2>
+      </div>
+      <div class="item"> -->
+        <!-- Your image here -->
+        <!-- <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+         Third image description.
+       </h2>
+     </div>
+     <div class="item"> -->
+      <!-- Your image here -->
+      <!-- <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-centered">
+        Fourth image description.
+      </h2>
+    </div>
+  </div>
+</div>
+</div>
+</section> -->
+<!-- End image carousel -->
+
+
+
+
+<!-- Youtube video -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container"> -->
+      <!-- Paper video. -->
+      <!-- <h2 class="title is-3">Video Presentation</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <div class="publication-video"> -->
+            <!-- Youtube embed code here -->
+            <!-- <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- End youtube video -->
+
+
+<!-- Video carousel -->
+<!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Another Carousel</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <video poster="" id="video1" autoplay controls muted loop height="100%"> -->
+            <!-- Your video file here -->
+            <!-- <source src="static/videos/carousel1.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video2">
+          <video poster="" id="video2" autoplay controls muted loop height="100%"> -->
+            <!-- Your video file here -->
+            <!-- <source src="static/videos/carousel2.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video3">
+          <video poster="" id="video3" autoplay controls muted loop height="100%">\ -->
+            <!-- Your video file here -->
+            <!-- <source src="static/videos/carousel3.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- End video carousel -->
+
+
+
+
+
+
+<!-- Paper poster -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+
+      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+          </iframe>
+        
+      </div>
+    </div>
+  </section> -->
+<!--End paper poster -->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+        @inproceedings{savov2025statespacediffuser,
+        title={{StateSpaceDiffuser: Bringing Long Context to Diffusion World Models}},
+        author={Savov, Nedko and Kazemi, Naser and Zhang, Deheng and Paudel, Danda Pani and Wang, Xi and Van Gool, Luc},
+        booktitle={Advances in Neural Information Processing Systems},
+        year={2025}
+      }
+    </code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+            <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
