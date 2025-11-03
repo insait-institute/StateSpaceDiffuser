@@ -6,7 +6,7 @@
   <!-- Replace the content tag with appropriate information -->
   <meta name="description" content="StateSpaceDiffuser couples diffusion and state-space models to sustain long-context world modeling rollouts.">
   <meta property="og:title" content="StateSpaceDiffuser: Bringing Long Context to Diffusion World Models"/>
-  <meta property="og:description" content="StateSpaceDiffuser injects recurrent state-space memory into diffusion world models to preserve coherent long-horizon rollouts."/>
+  <meta property="og:description" content="StateSpaceDiffuser injects state-space memory into diffusion world models to preserve coherent long-horizon rollouts."/>
   <meta property="og:url" content="URL OF THE WEBSITE"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
   <!-- <meta property="og:image" content="static/image/your_banner_image.png" />
@@ -64,7 +64,7 @@
             </div>
 
                   <div class="is-size-5 publication-authors">
-                    <span class="author-block"><sup>1</sup>INSAIT, Sofia University, <sup>2</sup> ETH Zurich, <sup>3</sup> TU Munich <br>arXiv 2025</span>
+                    <span class="author-block"><sup>1</sup>INSAIT, Sofia University, <sup>2</sup> ETH Zurich, <sup>3</sup> TU Munich <br>NeurIPS 2025</span>
                   </div>
 
                   <div class="column has-text-centered">
@@ -115,7 +115,7 @@
               </video>
             </div>
             <h2 class="subtitle has-text-centered mt-4">
-              StateSpaceDiffuser fuses diffusion-based world models with a recurrent state-space backbone to preserve coherent rollouts across long horizons.
+              StateSpaceDiffuser fuses diffusion-based world models with a state-space backbone to preserve coherent rollouts across long horizons.
             </h2>
           </div>
         </div>
@@ -163,67 +163,189 @@
 <!-- End paper abstract -->
 
 
-<!-- <section class="hero is-small"> -->
-<!--   <div class="hero-body"> -->
-<!--     -->
-<!--     <div class="container is-max-desktop"> -->
-<!--       <div class="columns is-centered has-text-centered"> -->
-<!--         <div class="column"> -->
-<!--           <h2 class="title is-4">Our Framework</h2> -->
-<!--           <div class="content has-text-justified"> -->
-<!--             -->
-<!--           <div class="has-text-centered"> -->
-<!--             -->
-<!--             <img src="static/images/teaserv2.png" alt="Teaser" height="300%"> -->
-<!--             &lt;!-- <img src="static/images/all_control.gif" alt="Your GIF" height="300%"> --&gt; -->
-<!--           </div> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--     -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </section> -->
+<section class="hero is-small">
+  <div class="hero-body">
+   
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Our Framework</h2>
+          <div class="content has-text-justified">
+           
+          <div class="has-text-centered">
+            <p>
+              StateSpaceDiffuser consists of a <b>Long-Context Branch</b> and a <b>Generative Branch</b>. The former employs a state-space model to compress the entire history, and the latter uses a diffusion model to generate high-fidelity frames.
+            </p>
+            <img src="static/images/architecture.png" alt="Teaser" height="300%">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+</div>
+</div>
+</section>
 
-<!-- <section class="hero is-small"> -->
-<!--   <div class="hero-body"> -->
-<!--     -->
-<!--     <div class="container is-max-desktop"> -->
-<!--       <div class="columns is-centered has-text-centered"> -->
-<!--         <div class="column"> -->
-<!--           <h2 class="title is-4">Multi-Environment Control with GenieRedux-G</h2> -->
-<!--           <div class="content has-text-justified"> -->
-<!--             <p> -->
-<!--               We avoid the costly human demonstration and video curation usually needed for training multi-environment world models, by instead annotating the behavior and controls of hundreds of virtual environments - our RetroAct dataset. Each annotated environment can give us many action demonstrations without the need for extra labeling. -->
-<!--             </p> -->
-<!--             <p> -->
-<!--               We train our GenieRedux-G model on interactions from many environments at once and, even with a random agent, the model learns to accurately execute the actions. -->
-<!--             </p> -->
-<!--             <p> -->
-<!--               -->
-<!--             </p> -->
-<!--             -->
-<!--           <div class="has-text-centered"> -->
-<!--             -->
-<!--             <video poster="" id="tree" autoplay controls muted loop height="100%">  -->
-<!--               <source src="static/videos/Control.mp4" -->
-<!--               type="video/mp4"> -->
-<!--             </video>  -->
-<!--                 <video poster="" id="tree" autoplay controls muted loop height="100%">  -->
-<!--                 <source src="static/videos/Replication.mp4" -->
-<!--                 type="video/mp4"> -->
-<!--               </video>  -->
-<!--             &lt;!-- <img src="static/images/all_control.gif" alt="Your GIF" height="300%"> --&gt; -->
-<!--           </div> -->
-<!--           </div> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--     -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- </section> -->
+<section class="hero is-small">
+  <div class="hero-body">
+   
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">MiniGrid Simple: A Simple Case Study</h2>
+          <div class="content has-text-justified">
+            <p>
+              On the first frame, we see the color of a single marker. The agent moves away and then returns for a total of 50 frames. Can diffusion predict the right color?
+            </p>
+            <p>
+              A typical diffusion world model is limited of how many frames it can take as input and cannot recall the color, while our StateSpaceDiffuser model correctly completes this task.
+            </p>
+           
+          <div class="has-text-centered">
+           
+            <img src="static/images/minigrid_simple.png" alt="Teaser" height="300%">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+</div>
+</div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+   
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">MiniGrid: Recalling Maze Layouts</h2>
+          <div class="content has-text-justified">
+            <p>
+              Given all frames so far in a sequence (up to 50 frames), the goal is to predict the next frame. We navigate a maze along a random path and return back. Can we recall the layout in the next step?
+            </p>
+            <p>
+              Diffusion world models consistently misremember the layout of the next step, while StateSpaceDiffuser, maintaining memory via the state-space model, always predicts the correct layout observed in previous steps.
+            </p>
+           
+          <div class="has-text-centered">
+           
+            <img src="static/images/minigrid2.png" alt="Teaser" width="50%">
+            <img src="static/images/minigrid.png" alt="Teaser" height="300%">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+</div>
+</div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+   
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">CSGO: Recall In A Visually Complex Environmnent</h2>
+          <div class="content has-text-justified">
+            <p>
+              In CSGO, we navigate along a given path. Only given this path, we reverse our actions and attempt to return along the way. 
+            </p>
+            <p>
+              It is evident that the diffusion baseline quickly gets confused and predicts incorrect scenes. In contrast, having compressed history representation at hand, StateSpaceDiffuser is able to maintain temporal consistency.
+            </p>
+           
+          <div class="has-text-centered">
+           
+            <img src="static/images/csgo.png" alt="Teaser" height="300%">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+</div>
+</div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+   
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Branch Ablation: Is the long-context state useful?</h2>
+          <div class="content has-text-justified">
+            <p>
+              We deomenstrate that without the state of the state-space model, the diffusion model hallucinates. Conversely, a state-space model without diffusion cannot render high-fidelity scenes.
+            </p>
+           
+          <div class="has-text-centered">
+           
+            <img src="static/images/ablation.png" alt="Teaser" height="300%">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+</div>
+</div>
+</section>
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+   
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Generalization Across Context Lengths</h2>
+          <div class="content has-text-justified">
+            <p>
+              Using the MiniGrid setup, we demonstrate that StateSpaceDiffuser trained on context length 50 can generalize to 150 steps:
+            </p>
+           
+          <div class="has-text-centered">
+           
+            <img src="static/images/generalization.png" alt="Teaser" width="70%">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+</div>
+</div>
+
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+   
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-4">Conclusion</h2>
+          <div class="content has-text-justified">
+            <p>
+              We introduce StateSpaceDiffuser, a novel world model that integrates state-space models with diffusion models to achieve temporally coherent long-horizon rollouts. Our experiments demonstrate that StateSpaceDiffuser significantly outperforms diffusion-only baselines in maintaining context over extended sequences, as evidenced in both 2D and 3D environments. This work highlights the effectiveness of combining state-space representations with diffusion synthesis for advancing the capabilities of world models.
+            </p>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+   
+</div>
+</div>
 
 
 <!-- <section class="hero is-small"> -->
