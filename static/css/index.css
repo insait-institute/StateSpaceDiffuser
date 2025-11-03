@@ -89,6 +89,13 @@ body {
   /*color: #4286f4;*/
 }
 
+.teaser-video {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
 .publication-video {
     position: relative;
     width: 100%;
@@ -132,6 +139,5 @@ body {
 .eql-cntrb { 
   font-size: smaller;
 }
-
 
 
