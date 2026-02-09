@@ -1,0 +1,7 @@
+[submodule "data_generation"]
+	path = data_generation
+	url = https://github.com/NSavov/ivg-data-generator.git
+[submodule "diamond"]
+	path = wrappers/diamond/diamond
+	url = https://github.com/eloialonso/diamond.git
+	branch = csgo

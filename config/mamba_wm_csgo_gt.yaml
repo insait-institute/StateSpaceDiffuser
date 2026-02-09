@@ -1,0 +1,35 @@
+defaults:
+  - config
+  - override data: csgo
+  - override task: match_ground_truth
+  - override model: mamba_wm
+  - _self_
+
+
+bench:
+  log_every: 100
+  sample_size: 20000
+  batch_size: 1
+
+
+common:
+  run_name: "mamba_wm"
+  ckpt_dpath: "/work/nedko_savov/projects/ssw/checkpoints/mamba_wm"
+  ckpt_load: "/work/nedko_savov/projects/ssw/checkpoints/mamba_wm/245_mamba_wm_seq17_csgo_mirror/model-65000.pt"
+
+task:
+  qualitative_dpath: "outputs/csgo/mamba_wm_245/seq17"
+
+data:
+  image_size: [144, 272]
+  seq_len: 17
+  n_actions: 60
+
+model:
+  dynamics:
+    input_size: 2448
+  enable_imagine: true
+  agent:
+    denoiser:
+      ssm:
+        n_action_classes: 60

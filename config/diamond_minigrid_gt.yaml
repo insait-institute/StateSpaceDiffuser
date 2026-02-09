@@ -1,0 +1,28 @@
+defaults:
+  - config
+  - override data: minigrid
+  - override task: match_ground_truth
+  - override model: diamond
+  - _self_
+
+model:
+  enable_imagine: true
+  n_steps_cond: 9
+
+
+bench:
+  log_every: 100
+  sample_size: 0
+  batch_size: 50
+  
+
+common:
+  run_name: "diamond"
+  ckpt_dpath: "/work/nedko_savov/projects/ssw/checkpoints/diamond"
+  ckpt_load: "/work/nedko_savov/projects/ssw/checkpoints/diamond/034_diamond_minigrid/checkpoints/state.pt"
+  ckpt_enable_manager: true
+  load_enable: true
+
+
+task:
+  qualitative_dpath: "outputs/diamond/debug"

@@ -1,22 +1,141 @@
-<div align="center">
+# UniverseLab
 
+Benchmarks and data processing for world models.
 
-# StateSpaceDiffuser
+## Setup
 
-This is the official repository of <b>StateSpaceDiffuser: Bringing Long Context to Diffusion World Models, NeurIPS'25</b>.
+Run the setup script from the repo root:
 
-[![Project Page](https://img.shields.io/badge/Project%20Page-Web-blue?style=for-the-badge)](https://insait-institute.github.io/StateSpaceDiffuser/)
-[![Paper](https://img.shields.io/badge/ArXiv-PDF-red?style=for-the-badge)](https://arxiv.org/pdf/2505.22246) 
-<!-- [![Models](docs/badges/badge_models.svg)](https://huggingface.co/INSAIT-Institute/GenieRedux)  -->
+```bash
+bash install.sh
+```
 
-Authors: [Nedko Savov](https://insait.ai/nedko-savov/), [Naser Kazemi](https://naser-kazemi.github.io/), [Deheng Zhang](https://insait.ai/deheng-zhang/), [Danda Pani Paudel](https://insait.ai/dr-danda-paudel/), [Xi Wang](https://xiwang1212.github.io/homepage/), [Luc Van Gool](https://insait.ai/prof-luc-van-gool/)
+CUDA is required. Ensure CUDA is installed and your environment exposes the correct CUDA paths (these may vary by machine).
 
-<img src="docs/teaser.png" alt="StateSpaceDiffuser teaser" width="800">
+## Benchmarking
 
+### Structure
 
-<!-- 
-Keywords: world model, long context, state-space model, Mamba, diffusion.
--->
-</div>
+Benchmark runs are driven by `run_bench.py` and Hydra configs under `config/`.
 
-StateSpaceDiffuser merges a state-space model for memory with a diffusion model for detailed visuals, allowing it to produce stable long-term video predictions. It tackles the challenge of drift in world models over extended rollouts. The approach achieves temporally consistent visual generation across both 2D and 3D interactive environments, significantly outperforming diffusion-only baseline in long-horizon tasks. Expect the code here soon!
+- **Models**: Wrapper classes in `models/` (e.g., Mamba WM, SSW, Diamond).
+- **Tasks**: Evaluation logic in `tasks/` (e.g., match ground truth, reverse action).
+- **Datasets**: Data loaders in `data/` for benchmarking (separate from training loaders).
+- **Metrics**: Implementations in `metrics/` used by tasks.
+
+The flow is:
+
+1) `run_bench.py` loads a Hydra config (defaults in `config/config.yaml`).
+2) `tools/build_tools.py` builds the model, dataset, and task.
+3) `bench/engine.py` iterates over data and executes the task.
+
+### Models (API)
+
+Models are `WorldModelBase` subclasses and must implement:
+
+- `forward(observations, actions, extras, **kwargs) -> dict`
+- `imagine(...)` if imagination is supported
+
+Relevant paths:
+
+- `bench/model.py`
+- `models/*.py`
+
+### Tasks (API)
+
+Tasks are `TaskBase` subclasses and must implement:
+
+- `execute(model, input_batch) -> dict[str, Any]`
+
+Tasks read from the batch dict:
+
+- `observations`
+- `actions`
+- `extras` (e.g., `frames_hq`)
+
+Relevant paths:
+
+- `bench/task.py`
+- `tasks/*.py`
+
+### Datasets (API)
+
+Bench datasets return a dict with at least:
+
+- `observations`
+- `actions`
+- `extras` (optional)
+
+Relevant paths:
+
+- `bench/dataset.py`
+- `data/*.py`
+
+### Metrics (API)
+
+Metrics are used by tasks and should implement:
+
+- `reset()`
+- `update(prediction, target) -> float`
+
+Relevant paths:
+
+- `bench/metric.py`
+- `metrics/*.py`
+
+## Examples
+
+Run a benchmark with an explicit checkpoint:
+
+```bash
+python run_bench.py \
+  common.ckpt_load=/path/to/checkpoint.pt \
+  common.ckpt_enable_manager=false \
+  data=minigrid \
+  model=mamba_wm \
+  data.data_root_dpath=/path/to/datasets \
+  task=match_ground_truth \
+  bench.batch_size=2 \
+  task.qualitative_dpath=outputs/gt_vis \
+  model.enable_imagine=false
+```
+
+## Task Options
+
+Each task exposes its own options via `task.*` overrides. Common ones include:
+
+- `task.qualitative_dpath`: save qualitative outputs (supported by match_ground_truth, reverse_action)
+- `task.action`: base action for reverse_action (dataset-specific enum name)
+- `task.n_steps`: task-specific horizon (where applicable)
+
+## Imagination
+
+Imagination is controlled by the model config flag:
+
+- `model.enable_imagine=true|false`
+
+Tasks may override behavior (e.g., `reverse_action` always uses imagination), so set this explicitly when you want deterministic behavior across tasks.
+
+## Checkpoint Loading
+
+Checkpoint loading is controlled via `common.*` options:
+
+- `common.ckpt_enable_manager=true|false`
+  - When `true`, `common.ckpt_load` can be a tuple `(model_id, step)` or a path.
+  - When `false`, `common.ckpt_load` is treated as a direct file path.
+- `common.ckpt_dpath`: root directory for checkpoint runs (used by the manager).
+- `common.ckpt_central_dpath`: optional secondary root for checkpoint syncing (created if set).
+- `common.ckpt_load`: either a tuple `(id, step)` or a direct path.
+
+Examples:
+
+```bash
+# Manager mode with (id, step)
+python run_bench.py common.ckpt_enable_manager=true \
+  common.ckpt_dpath=/path/to/checkpoints \
+  common.ckpt_load="(239, 71000)"
+
+# Direct path mode
+python run_bench.py common.ckpt_enable_manager=false \
+  common.ckpt_load=/path/to/checkpoint.pt
+```

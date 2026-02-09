@@ -1,0 +1,6 @@
+_target_: tasks.match_ground_truth_task.MatchGroundTruthTask
+name: match_ground_truth
+n_steps: 100
+# qualitative_dpath: "outputs/mamba_wm/debug"
+qualitative_dpath: null
+_convert_: partial

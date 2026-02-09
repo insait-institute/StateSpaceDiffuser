@@ -1,0 +1,42 @@
+defaults:
+  - config
+  - override data: csgo
+  - override task: match_ground_truth
+  - override model: ssw
+  - _self_
+  # - env: csgo
+  # - agent: csgo
+  # - world_model_env: higher_quality
+
+data:
+  central_seq_len: 17
+  n_actions: 51
+  image_size: [32, 64] #[152,280]
+  # image_size: [150, 280] 
+
+model:
+  enable_imagine: true
+  agent:
+    denoiser:
+      ssm:
+        n_action_classes: 51
+      inner_model:
+        state_channels: 128
+      freeze_ssm: True
+
+bench:
+  log_every: 100
+  sample_size: 20000
+  batch_size: 1
+  
+
+common:
+  run_name: "ssw"
+  ckpt_dpath: "/work/nedko_savov/projects/ssw/checkpoints/ssw"
+  ckpt_load: "/work/nedko_savov/projects/ssw/checkpoints/ssw/207_ssw_seq17_lowres_csgo_nonfreeze_autoregssm_mirrored/checkpoints/state_upsampler036.pt"
+  ckpt_enable_manager: true
+  load_enable: true
+
+
+task:
+  qualitative_dpath: "outputs/csgo/ssw_207/half_imagination_state_upsampler036/seq17"

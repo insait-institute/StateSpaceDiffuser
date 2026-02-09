@@ -1,0 +1,4 @@
+_target_: tasks.csgo_turn_task.CSGOTurnTask
+rotation_level: 60
+n_steps: 100
+_convert_: partial

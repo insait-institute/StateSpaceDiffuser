@@ -1,0 +1,10 @@
+defaults:
+  - _self_
+  -  diamond/trainer@
+
+name: diamond
+n_steps_cond: 9
+
+_target_: models.diamond_model.DiamondWorldModel
+
+data_range: [-1,1]

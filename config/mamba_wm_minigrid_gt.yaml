@@ -1,0 +1,24 @@
+defaults:
+  - config
+  - override data: minigrid
+  - override task: match_ground_truth
+  - override model: mamba_wm
+  - _self_
+
+
+bench:
+  log_every: 100
+  sample_size: 0
+  batch_size: 20
+
+common:
+  run_name: "mamba_wm"
+  ckpt_dpath: "/work/nedko_savov/projects/ssw/checkpoints/mamba_wm"
+  ckpt_load: "/work/nedko_savov/projects/ssw/checkpoints/mamba_wm/243_mamba_wm_seq51_csgo/model-29000.pt"
+
+data:
+  image_size: [144, 144]
+  central_seq_len: 51
+
+task:
+  qualitative_dpath: "outputs/minigrid/mamba_wm/seq51"

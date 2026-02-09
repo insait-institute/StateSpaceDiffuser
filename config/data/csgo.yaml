@@ -1,0 +1,15 @@
+_target_: datasets.csgo_dataset.MirroredCSGODataset
+
+name: csgo
+
+data_root_dpath: ???
+dataset_name: "csgo"
+dataset_subdpath: "full_res"
+seq_len: 17
+step_size: 20
+enable_high_res: true
+n_actions: 51
+n_workers: 8
+
+
+has_reverse_actions: false

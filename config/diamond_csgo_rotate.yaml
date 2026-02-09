@@ -1,0 +1,27 @@
+defaults:
+  - config
+  - override data: csgo
+  - override task: reverse_action
+  - override model: diamond
+  - _self_
+
+
+model:
+  enable_imagine: true
+
+bench:
+  log_every: 100
+  sample_size: 20000
+  batch_size: 50
+  
+
+common:
+  run_name: "diamond"
+  ckpt_dpath: "/work/nedko_savov/projects/ssw/checkpoints/diamond"
+  ckpt_load: "/work/nedko_savov/projects/ssw/checkpoints/diamond/034_diamond_minigrid/checkpoints/state.pt"
+  ckpt_enable_manager: true
+  load_enable: false
+
+task:
+  action: TURN_RIGHT_60
+  qualitative_dpath: "outputs/diamond/debug"

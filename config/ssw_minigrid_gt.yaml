@@ -1,0 +1,39 @@
+defaults:
+  - config
+  - override data: minigrid
+  - override task: match_ground_truth
+  - override model: ssw_minigrid
+  - _self_
+  # - env: csgo
+  # - agent: csgo
+  # - world_model_env: higher_quality
+  
+
+data:
+  central_seq_len: 17
+  image_size: [150, 150] #[152,280]
+
+model:
+  enable_imagine: false
+  agent:
+    denoiser:
+      ssm:
+        n_action_classes: 4
+
+
+bench:
+  log_every: 100
+  sample_size: 0
+  batch_size: 20
+  
+
+common:
+  run_name: "ssw"
+  ckpt_dpath: "/work/nedko_savov/projects/ssw/checkpoints/ssw"
+  ckpt_load: "/work/naser_kazemi/projects/ssw/checkpoints/ssw/209_ssw_seq17_csgo_ft239/checkpoints/state_upsampler_denoiser_157.pt"
+  ckpt_enable_manager: true
+  load_enable: true
+
+
+task:
+  qualitative_dpath: "outputs/minigrid/ssw_157/gt_input/seq17"

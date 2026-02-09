@@ -1,0 +1,28 @@
+defaults:
+  - config
+  - override data: minigrid
+  - override task: match_ground_truth
+  - override model: s4_wm
+  - _self_
+
+model:
+  enable_imagine: false
+
+
+bench:
+  log_every: 100
+  sample_size: 0
+  batch_size: 40
+
+common:
+  run_name: "s4_wm"
+  ckpt_dpath: "/work/naser_kazemi/project/ssw/checkpoints/s4_wm"
+  ckpt_enable_manager: true
+  ckpt_load: (5, 10000)
+
+data:
+  image_size: [144, 144]
+  central_seq_len: 51
+
+task:
+  qualitative_dpath: "outputs/minigrid/s4_wm/seq17"

@@ -1,0 +1,20 @@
+name: "mamba_wm"
+state_channels: 1296 
+n_steps_cond: 9
+
+
+tokenizer:
+  model_name: "Cosmos-0.1-Tokenizer-CI16x16"
+  model_dpath: "checkpoints/nvidia_pretrained"
+
+
+dynamics:
+  dim: 16
+  action_dim: 16
+  state_dim: 256
+  expand: 4
+  n_fuser_heads: 8
+  n_layers: 1
+  input_size: 1296
+
+data_range: [-1,1]

@@ -1,0 +1,12 @@
+defaults:
+  - mamba_wm
+  - _self_
+
+name: "s4_wm"
+
+dynamics:
+  prenorm: true
+  n_layers: 1
+  state_dim: 256
+  dropout: 0.0
+  lr: 0.001

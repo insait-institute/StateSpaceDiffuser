@@ -1,0 +1,43 @@
+defaults:
+  - data: csgo
+  - task: turn_task
+  - model: mamba_wm
+  - _self_
+
+
+model:
+  enable_imagine: false
+
+
+accelerate:
+  cpu: false
+  log_with: wandb
+  
+
+hydra:
+  # output_subdir: ${common.cache_dpath}/.hydra
+  run: 
+    dir: "."
+
+bench:
+  log_every: 100
+  sample_size: 1024
+  batch_size: 32
+  ckpt_fpath: null
+
+common:
+  run_name: "eval"
+  cache_dpath: "cache"
+  log_mode: "online"
+  log_project: "ssw"
+  log_dpath: "${common.cache_dpath}/wandb"
+  ckpt_central_dpath: ""
+  ckpt_dpath: ???
+  ckpt_enable_manager: True
+  ckpt_load: (239, 71000) #either a path or a tuple (model_id, ckpt_id)
+  # ckpt_load: (34, 98000) #either a path or a tuple (model_id, ckpt_id)
+  load_enable: True
+
+# Logging configuration if you wish to keep it here, or use a separate file
+logging:
+  level: INFO

@@ -1,0 +1,13 @@
+_target_: datasets.minigrid_dataset.MiniGridDataset
+
+name: minigrid
+
+data_root_dpath: "/scratch/nedko_savov/projects/ssw/datasets"
+dataset_name: "minigrid_v2.0.1_test"
+seq_len: 101
+seq_len_ext: 101
+central_seq_len: 51
+seq_step: 1
+image_size: [150, 150] #[152,280]
+n_actions: 4
+repeat: 1

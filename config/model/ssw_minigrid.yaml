@@ -1,0 +1,23 @@
+defaults:
+  -  ssw/trainer_ssw_minigrid@
+  - _self_
+
+name: ssw
+n_steps_cond: 9
+
+
+data_range: [-1,1]
+
+state_channels: 1296 
+
+
+tokenizer:
+  model_name: "Cosmos-0.1-Tokenizer-CI16x16"
+  model_dpath: "checkpoints/nvidia_pretrained"
+
+# world_model_env:
+#   diffusion_sampler_next_obs:
+#     _target_: wrappers.ssw.ssw.models.diffusion.DiffusionSamplerConfig
+  
+#   diffusion_sampler_upsampling:
+#     _target_: wrappers.ssw.ssw.models.diffusion.DiffusionSamplerConfig

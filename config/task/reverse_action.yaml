@@ -1,0 +1,6 @@
+_target_: tasks.reverse_action_task.ReverseActionTask
+name: reverse_action
+action: ???
+n_steps: 16
+qualitative_dpath: null
+_convert_: partial
